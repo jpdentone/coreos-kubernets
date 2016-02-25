@@ -1,0 +1,6 @@
+- name: create manifests directoy
+  file: name=/etc/kubernetes/manifests state=directory
+
+- name: create kube-controller-manager pod manifest
+  template: src=kube-controller-manager.yaml.j2 dest=/etc/kubernetes/manifests/kube-controller-manager.yaml
+

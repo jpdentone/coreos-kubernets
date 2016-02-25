@@ -1,0 +1,24 @@
+---
+- hosts: coreos
+  gather_facts: false
+  roles:
+  - defunctzombie.coreos-bootstrap
+  tasks:
+  - name: install httplib2
+    pip: name=httplib2
+
+- hosts: etcd
+  sudo: yes
+  roles:
+  - etcd-node
+    
+- hosts: master
+  sudo: yes
+  roles:
+  - kubernetes-master
+
+- hosts: minions
+  sudo: yes
+  roles:
+  - kubernetes-worker
+

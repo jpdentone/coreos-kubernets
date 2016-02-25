@@ -1,0 +1,14 @@
+[master]
+core1 ansible_ssh_host=172.19.9.213
+
+[minions]
+core2 ansible_ssh_host=172.19.8.101
+core3 ansible_ssh_host=172.19.8.102
+
+[etcd]
+core1 ansible_ssh_host=172.19.9.213
+
+[coreos:children]
+master
+etcd
+minions
