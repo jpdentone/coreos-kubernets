@@ -1,0 +1,13 @@
+- name: create example directory
+  file: name=/home/core/kubernetes/example state=directory owner=core group=core
+
+- name: set up example files
+  copy: src=./example/{{item}} dest=/home/core/kubernetes/example/{{item}} owner=core group=core
+  with_items:
+  - redis-master-controller.yaml
+  - redis-master-service.yaml
+  - redis-slave-controller.yaml
+  - redis-slave-service.yaml
+  - frontend-controller.yaml
+  - frontend-service.yaml
+
