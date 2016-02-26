@@ -1,12 +1,12 @@
 [master]
-core1 ansible_ssh_host=172.19.9.213
+core1 ansible_ssh_host=172.19.9.211
 
 [minions]
-core2 ansible_ssh_host=172.19.8.101
-core3 ansible_ssh_host=172.19.8.102
+core2 ansible_ssh_host=172.19.8.244
+core3 ansible_ssh_host=172.19.8.245
 
 [etcd]
-core1 ansible_ssh_host=172.19.9.213
+core1 ansible_ssh_host=172.19.9.211
 
 [coreos:children]
 master
