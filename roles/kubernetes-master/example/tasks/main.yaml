@@ -11,4 +11,5 @@
   - frontend-controller.yaml
   - frontend-service.yaml
   - go.sh
+  - cleanup.sh
 

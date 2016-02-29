@@ -48,3 +48,8 @@ Run:
 $ bash kubernetes/example/go.sh
 ```
 
+Cleanup:
+```
+$ bash kubernetes/example/cleanup.sh
+```
+
