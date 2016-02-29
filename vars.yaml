@@ -3,10 +3,10 @@
 ETCD_INITIAL_CLUSTER_TOKEN: square-cluster
 
 # URL for the API server (IP is of the master's machine)
-MASTER_URL: https://172.19.9.211
+MASTER_URL: https://<master ip>
 
 # Name of cloud provider (can be left empty)
-CLOUD_PROVIDER:
+CLOUD_PROVIDER: aws
 
 # The name of the Ansible group where all the etcd machines belong.
 # Used by etcd-node.
@@ -17,7 +17,7 @@ ETCD_ANSIBLE_GROUP: etcd
 # here, since a playbook forgroup since these could be private IPs (and we do
 # not gather facts for that group)
 ETCD_HOSTS:
-- http://172.19.9.211:2379
+- http://<master ip>:2379
 
 # OPTIONAL: Public IP of the API server. This is used by the certificate
 # generation code to add this IP address to the certificate.
