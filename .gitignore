@@ -1,0 +1,4 @@
+inventory
+vars.yaml
+kube-tls/conf/openssl.cnf
+kube-tls/scripts/.srl
