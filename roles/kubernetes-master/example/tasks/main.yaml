@@ -10,4 +10,5 @@
   - redis-slave-service.yaml
   - frontend-controller.yaml
   - frontend-service.yaml
+  - go.sh
 
