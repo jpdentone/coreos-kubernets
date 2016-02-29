@@ -65,7 +65,7 @@ Running
 
 2. Customize `vars.yaml`
 
-3. Generate TSL: (first need to customize kube-tls/conf/openssl.cnf)
+3. Generate TSL: (first need to customize `kube-tls/conf/openssl.cnf`)
    ```
    $ cd kube-tls/scripts/
    $ ./generate-all.sh
@@ -77,7 +77,7 @@ Running
 $ ansible-playbook -i ./inventory  -e @./vars.yaml provision.yaml
 ```
 
-5. Then ssh to your master, and you should be able to start exploring:
+Then ssh to your master, and you should be able to start exploring:
 ```
 $ /opt/local/bin/kubectl get nodes
 ```
@@ -86,13 +86,48 @@ Example
 -------
 Taken from `https://github.com/kubernetes/kubernetes/tree/release-1.1/examples/guestbook`
 
-Run:
-```
-$ bash kubernetes/example/go.sh
-```
+   - Run:
+   ```
+   $ bash kubernetes/example/go.sh
+   ```
 
-Cleanup:
-```
-$ bash kubernetes/example/cleanup.sh
-```
+   - Make sure all the pods are running
+   ```
+   $ /opt/local/bin/kubectl get pods
+   NAME                 READY     STATUS    RESTARTS   AGE
+   frontend-d3h2h       1/1       Running   0          3m
+   frontend-r0w0m       1/1       Running   0          3m
+   frontend-z49di       1/1       Running   0          3m
+   redis-master-nogsw   1/1       Running   0          3m
+   redis-slave-592sz    1/1       Running   0          3m
+   redis-slave-eos92    1/1       Running   0          3m
+   ```
+
+   - Make sure the fronend service created the ELB and get the ELB link (`LoadBalancer Ingress`)
+   ```
+   $ /opt/local/bin/kubectl describe service frontend
+   Name:       frontend
+   Namespace:     default
+   Labels:        name=frontend
+   Selector:      name=frontend
+   Type:       LoadBalancer
+   IP:         10.3.0.58
+   LoadBalancer Ingress:   ab215f0f1df1511e5b39c0ee7c7529bc-932350016.us-east-1.elb.amazonaws.com
+   Port:       <unnamed>   80/TCP
+   NodePort:      <unnamed>   30435/TCP
+   Endpoints:     10.2.72.5:80,10.2.80.3:80,10.2.80.4:80
+   Session Affinity: None
+   Events:
+     FirstSeen LastSeen Count From        SubobjectPath  Reason         Message
+     ───────── ──────── ───── ────        ─────────────  ──────         ───────
+     3m     3m    1  {service-controller }         CreatingLoadBalancer Creating load balancer
+     3m     3m    1  {service-controller }         CreatedLoadBalancer  Created load balancer
+   ```
+
+   - You can access the pod using the ELB address i.e `http://ab215f0f1df1511e5b39c0ee7c7529bc-932350016.us-east-1.elb.amazonaws.com/` 
+
+   - If everything is ok you can cleanup by running
+   ```
+   $ bash kubernetes/example/cleanup.sh
+   ```
 
