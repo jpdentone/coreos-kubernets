@@ -1,4 +1,4 @@
-Set up a Kubernetes Cluster on Coreos through Ansible
+Set up a Kubernetes Cluster on AWS instances running coreOS through Ansible
 ========================================================================
 
 This is based on `https://github.com/thesamet/ansible-kubernetes-coreos` with few mods/fixes for our env
