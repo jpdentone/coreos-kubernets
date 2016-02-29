@@ -2,4 +2,4 @@ inventory
 vars.yaml
 kube-tls/conf/openssl.cnf
 kube-tls/scripts/.srl
-kube-tls/certs
+kube-tls/certs/*
