@@ -6,15 +6,58 @@ This is based on `https://github.com/thesamet/ansible-kubernetes-coreos` with fe
 
 requirements
 ------------
+aws setup: 
+
+   - VPC with a tag key `KubernetesCluster` and any value key (just need to make sure you use the same for all the cluster)
+   - Subnets with public face for the ELB -- need the same tag `KubernetesCluster` and key value
+   - IAM policy:
+      -- policy example:
+      ```
+      {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "ec2:*"
+               ],
+               "Resource": [
+                   "*"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "elasticloadbalancing:*"
+               ],
+               "Resource": [
+                   "*"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": "s3:*",
+               "Resource": [
+                   "arn:aws:s3:::kubernetes-*"
+               ]
+           }
+       ]
+   }
+   ```
+
+   - IAM role:
+         -- name: kubernetes-master-role (This name would be use in the cloudformation template -- IamInstanceProfile)
+    
 coreos-cluster: need a full CoreOS cluster setup with access to SSH via keys
 
-check `https://s3.amazonaws.com/jpcf-template/coreos-base.json` as cloudformation template example
+   - check `https://s3.amazonaws.com/jpcf-template/coreos-base.json` as cloudformation template example
+   - when creating, use tag key `KubernetesCluster` and same key value
 
 coreos-bootstrap:
 
-```
-$ ansible-galaxy install defunctzombie.coreos-bootstrap`
-```
+   ```
+   $ ansible-galaxy install defunctzombie.coreos-bootstrap`
+   ```
 
 Running
 -------
