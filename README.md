@@ -124,7 +124,7 @@ Taken from `https://github.com/kubernetes/kubernetes/tree/release-1.1/examples/g
      3m     3m    1  {service-controller }         CreatedLoadBalancer  Created load balancer
    ```
 
-   - You can access the pod using the ELB address i.e `http://ab215f0f1df1511e5b39c0ee7c7529bc-932350016.us-east-1.elb.amazonaws.com/` 
+   - You can access the service using the ELB address i.e `http://ab215f0f1df1511e5b39c0ee7c7529bc-932350016.us-east-1.elb.amazonaws.com/` 
 
    - If everything is ok you can cleanup by running
    ```
