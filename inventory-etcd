@@ -1,0 +1,11 @@
+[etcdreplace]
+core4 ansible_ssh_host=172.19.9.22
+
+[etcdmembers]
+core4 ansible_ssh_host=172.19.9.22
+core1 ansible_ssh_host=172.19.9.167
+core5 ansible_ssh_host=172.19.9.168
+
+[coreos:children]
+etcdreplace
+etcdmembers

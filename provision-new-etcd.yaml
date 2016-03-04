@@ -1,0 +1,19 @@
+---
+- hosts: coreos
+  gather_facts: false
+  roles:
+  - defunctzombie.coreos-bootstrap
+  tasks:
+  - name: install httplib2
+    pip: name=httplib2
+
+- hosts:  etcdmembers
+  sudo: yes
+  tasks:
+    - name: getting etcd members
+      command: "hostname > /dev/null"
+
+- hosts: etcdreplace
+  sudo: yes
+  roles:
+  - etcd-node-replace

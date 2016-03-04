@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -X POST http://{{MASTER_IP}}:2379/v2/members -H 'Content-Type: application/json' -d '{"PeerURLs": ["http://{{ansible_default_ipv4.address}}:2380"]}'
