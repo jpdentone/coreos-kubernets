@@ -7,6 +7,8 @@ core3 ansible_ssh_host=<minion2 ip>
 
 [etcd]
 core1 ansible_ssh_host=<master ip>
+core4 ansible_ssh_host=<etcdnode ip>
+core5 ansible_ssh_host=<etcdnode ip>
 
 [coreos:children]
 master

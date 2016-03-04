@@ -1,10 +1,10 @@
 [etcdreplace]
-core4 ansible_ssh_host=172.19.9.22
+core4 ansible_ssh_host=<NEWetcdnode ip>
 
 [etcdmembers]
-core4 ansible_ssh_host=172.19.9.22
-core1 ansible_ssh_host=172.19.9.167
-core5 ansible_ssh_host=172.19.9.168
+core4 ansible_ssh_host=<NEWetcdnode ip>
+core1 ansible_ssh_host=<etcdnode ip>
+core5 ansible_ssh_host=<etcdnode ip>
 
 [coreos:children]
 etcdreplace
