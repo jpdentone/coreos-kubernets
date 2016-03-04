@@ -3,6 +3,9 @@
 ETCD_INITIAL_CLUSTER_TOKEN: square-cluster
 
 # URL for the API server (IP is of the master's machine)
+MASTER_IP: <master ip>
+
+# URL for the API server (IP is of the master's machine)
 MASTER_URL: https://<master ip>
 
 # Name of cloud provider (can be left empty)
@@ -18,6 +21,8 @@ ETCD_ANSIBLE_GROUP: etcd
 # not gather facts for that group)
 ETCD_HOSTS:
 - http://<master ip>:2379
+- http://<etcdnode ip>:2379
+- http://<etcdnode ip>:2379
 
 # OPTIONAL: Public IP of the API server. This is used by the certificate
 # generation code to add this IP address to the certificate.
@@ -62,8 +67,8 @@ KUBERNETES_VERSION: 1.1.2
 HYPERKUBE_IMAGE: thesamet-docker-registry.bintray.io/kubernetes/hyperkube:v1.1.2-0ede84e6
 
 # Path to download kubelet from.
-KUBELET_BINARY: https://bintray.com/artifact/download/thesamet/kubernetes/v1.1.2-0ede84e6/linux-amd64/kubelet
+KUBELET_BINARY: https://s3.amazonaws.com/opsitters/kubernetes-release/v1.1.2/kubelet
 
 # Path to download kubectl form.
-KUBECTL_BINARY: https://bintray.com/artifact/download/thesamet/kubernetes/v1.1.2-0ede84e6/linux-amd64/kubectl
+KUBECTL_BINARY: https://s3.amazonaws.com/opsitters/kubernetes-release/v1.1.2/kubectl
 
