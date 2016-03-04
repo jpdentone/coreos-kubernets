@@ -3,6 +3,7 @@ Set up a Kubernetes Cluster on AWS instances running coreOS through Ansible
 
 This is based on `https://github.com/thesamet/ansible-kubernetes-coreos` with few mods/fixes for our env
 
+This will set up a cluster with 5 nodes, 1 kubernetes masters which runs as etcd endpoint too, 2 kubernetes minions and 2 etcd nodes  
 
 requirements
 ------------
@@ -50,7 +51,7 @@ aws setup:
     
 coreos-cluster: need a full CoreOS cluster setup with access to SSH via keys
 
-   - check `https://s3.amazonaws.com/jpcf-template/coreos-base.json` as cloudformation template example
+   - check `https://s3.amazonaws.com/jpcf-template/coreos-kuber.json` as cloudformation template example
    - when creating, use tag key `KubernetesCluster` and same key value
 
 coreos-bootstrap:
@@ -130,4 +131,31 @@ Taken from `https://github.com/kubernetes/kubernetes/tree/release-1.1/examples/g
    ```
    $ bash kubernetes/example/cleanup.sh
    ```
+  
+  Reconfiguration
+  ---------------
 
+  - If the kubernetes master goes BOOM, a new masters needs to be setup and to mantain quorum we will need a new etcd member.
+    1. edit openssl.cnf and regenerate all the certs
+    2. edit `vars.yaml` and 'inventory'
+    3. Run:
+    ```
+    $ ansible-playbook -i ./inventory  -e @./vars.yaml provision.yaml
+    ```
+    4. you should be able to list/get all the rc, services and pods as before
+
+  - To get new ETCD member into the cluster
+    1. edit `inventory-etcd`; the "etcdreplace" group is the IP of the new node and "etcdmembers" are all the etcd endpoints (including new)
+    2. run
+       ```
+       $ ansible-playbook -i ./inventory-etcd  -e @./vars.yaml provision-new-etcd.yaml
+       ```
+    3. From master, confirm the new node is there 
+       ```
+       $ etcdctl member list
+       ```
+    4. From new ETCD member, make sure it synced ok
+       ```
+       $ etcdctl get /registry/services/specs/default/frontend
+       ```
+       
